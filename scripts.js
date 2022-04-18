@@ -9,7 +9,7 @@ function entrar(){
     nome = prompt("Qual seu nome?");
     obj = {name: nome};
     const promisse = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants",obj)
-    promisse.then(manterConexao);
+    promisse.then(carregarMensagens);
     promisse.catch(tratarErroEntrada);
 }
 
@@ -27,10 +27,9 @@ function manterConexao(){
 }
 setInterval(manterConexao,4000);
 
-function tratarErro(){
+function tratarErro(erro){
     console.log("Status code: " + erro.response.status);
-    window.location.reload()
-    entrar();
+    window.location.reload();
 }
 
 function enviarMensagem(){
@@ -95,13 +94,6 @@ function renderizarMensagens(response){
         carregarMensagens(response);
     }, 4000);  
 }
-
-
-
-/*setInterval(function () {
-    const promisse = axios.post("https://mock-api.driven.com.br/api/v6/uol/status",obj);
-    promisse.then(carregarMensagens);
-}, 4000);*/
 
 function rolar(){
     const elementoQueQueroQueApareca = document.querySelector('.mensagem');
